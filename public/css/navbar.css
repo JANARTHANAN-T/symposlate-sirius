@@ -1,0 +1,31 @@
+
+@font-face {
+    font-family:Regular;
+    src: url('/fonts/IBM_Plex_Sans/IBMPlexSans-MediumItalic.ttf');
+}
+    
+nav{
+    background-color:#461143 ;
+    color:white !important;
+}
+
+.brand-logo{
+    height: 30px;
+    margin-left: 50px;  
+}
+
+.nav-link{
+    color:white !important;
+}
+.user-name{
+    border-right:1px solid white;
+    padding:auto 3px;
+}
+
+
+@media screen and (max-width:767px){
+    .user-name{
+        border: none;
+        margin-top: 30px;
+    }
+}

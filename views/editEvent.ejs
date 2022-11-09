@@ -1,0 +1,67 @@
+<% layout('layout/boilerplate') %>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/css/form.css" />
+<link rel="stylesheet" href="/css/addEvent.css"/>
+
+<!-- navbar -->
+<%- include('./partials/navbar')%>
+
+<!-- body -->
+<div>
+  <div class="contain mt-5">
+    <!-- card layout -->
+    <div class="row layer ">
+      <!-- left image -->
+      <div class="col-lg-6 left">
+        <div class="d-flex align-items-center mb-4">
+           <a href="/events">
+            <img src="\Assets\Icons\arrow.png"  alt="" height="20px" />
+          </a>
+          <span class="header fw-bold fs-4 px-2"> Edit Event</span><br />
+        </div>
+        <img src="\Assets\BackgroundImages\bg2.png" class="img-fluid image" />
+      </div>
+      <!-- right edit event form -->
+      <div class="col-lg-6 right">
+        <h4 class="my-4 text-center fw-bold">Event Information</h4>
+        <form action="/events/edit/<%= event._id  %>?_method=PUT" method="post" class="d-grid needs-validation px-4" >
+          <label for="eventName" class="form-label mt-2 fw-bold" >Event name</label>
+          <input type="text" class="form-control input" id="eventName" name="name" value="<%= event.name  %>"  required/>
+          <label for="eventDesc" class="form-label mt-2 fw-bold">Event Description</label>
+          <textarea class="form-control input" id="eventDesc" name="desc" required><%= event.desc  %></textarea>
+          <label for="eventUrl" class="form-label mt-2 fw-bold">Event Url</label>
+          <input type="url" class="form-control input" id="eventUrl" name="url" value="<%= event.url  %>" required/>
+          <label for="eventName" class="form-label mt-2 fw-bold">Event Date</label>
+          <input type="date" placeholder="username" class="form-control input"id="eventName" name="date" value="<%= date %>" required/>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="start" class="form-label mt-2 fw-bold">Start Time</label>
+              <input type="time" class="form-control input" name="start" id="start" value="<%= event.start %>" required/>
+            </div>
+            <div class="col-md-6">
+              <label for="end" class="form-label mt-2 fw-bold">End Time</label>
+              <input type="time" class="form-control input" name="end" value="<%= event.end  %>" id="end" required/>
+            </div>
+          </div>
+          <div class="invalid-feedback">Please provide a valid zip.</div>
+          <div class="text-danger fs-6"><%= errMsg  %> </div>
+          <div class="row align-items-center">
+            <!-- cancel - go back to event page -->
+            <div class="col-sm-6 text-end">
+              <a class="btn fs-5" href="/events">Cancel</a>
+            </div>
+            <!-- update form button -->
+            <div class="col-sm-6 text-center">
+              <button class="button my-3 px-3">UPDATE</button>
+            </div>
+          </div>
+        </form>
+        <!-- delete form -->
+        <form action="/events/delete/<%= event._id %>?_method=DELETE" method="POST" >
+          <button class="btn fs-5 text">Delete this event</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

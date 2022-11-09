@@ -1,0 +1,57 @@
+<% layout('layout/boilerplate') %>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/css/form.css"> 
+
+<!-- form body -->
+<div class="container">
+    <!-- logo image for mobile view -->
+    <div class="logo-mobile m-4 " >
+        <img  src="/Assets/Logo/Logo.png" alt="Logo" height="100px" width="100%">
+    </div>
+    <!-- forms -->
+    <div class="row">
+        <!-- login form -->
+        <div class="col-md-6 p-5 my-3">
+            <div class="text-center">
+                <img src="\Assets\BackgroundImages\bg1.png" alt="Image" height="260px" width="80%">
+            </div>
+            <h4 class="my-4 header">Login</h4>
+            <form action="/login" method="post" class="needs-validation" novalidate>
+                <input type="text" placeholder="Username" class="form-control input my-3" name="username" required>
+                <input type="password" placeholder="Password" class="form-control input mt-3" name="password" required>
+                <div class="invalid-feedback">
+                    All Fields are Required
+                  </div>
+                  <div class="fs-6 m-2 text-danger">
+                    <%= error %>
+                  </div>
+                  <div class="d-grid gap-3">
+                      <button class=" button mt-4">LOGIN</button>
+                  </div>
+            </form>
+        </div>
+        <!-- registration form -->
+        <div class="col-md-6 p-5">
+            <div class="text-end logo">
+                <img  src="/Assets/Logo/Logo.png" alt="Logo" height="100px" width="100%">
+            </div>
+            <div class="mt-5">
+                <h4 class="my-4 header">Register</h4>
+                <form action="/register" method="post" class="needs-validation" novalidate>
+                    <input type="text" placeholder="Your Name" class="form-control input my-3" name="name"  required>
+                    <input type="text" placeholder="Register ID" class="form-control input my-3" name="id" required>
+                    <input type="email" placeholder="Email ID" class="form-control input my-3" name="email" required >
+                    <input type="text" placeholder="Username" class="form-control input my-3" name="username" required>
+                    <input type="password" placeholder="Password" class="form-control input mt-3" name="password" required>
+                    <div class="invalid-feedback">
+                        All Fields are Required
+                      </div>
+                      <div class="d-grid gap-3">
+                          <button class="button mt-4" type="submit">REGISTER</button>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

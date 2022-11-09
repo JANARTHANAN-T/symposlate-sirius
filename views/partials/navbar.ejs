@@ -1,0 +1,25 @@
+<!-- stylesheets -->
+<link rel="stylesheet" href="/css/navbar.css">
+
+<nav class="navbar fixed-top navbar-expand-md ">
+    <div class="container-fluid">
+      <!-- navbar logo -->
+      <div class="navbar-brand">
+        <img class="brand-logo" class="img-fluid" src="\Assets\Logo\Logo2.png" />
+      </div>
+      <div>
+          <button class="navbar-toggler text-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars text-light"></i>
+          </button>
+          <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+            <ul class="navbar-nav me-4 ">
+              <!-- navbar username -->
+               <li class="nav-item nav-link user-name ">Hi &ThinSpace;<%= currentUser.name  %></li>
+               <!-- logout button -->
+               <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+            </ul>   
+          </div>
+      </div>
+  </div>
+</nav>
+

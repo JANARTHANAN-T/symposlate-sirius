@@ -1,0 +1,115 @@
+<% layout('layout/boilerplate') %>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/css/form.css" />
+<link rel="stylesheet" href="/css/viewEvent.css" />
+
+<!-- navbar -->
+<%- include('./partials/navbar')%>
+
+<!-- nav - events and calendar -->
+<div class="navbar fixed navbar-light">
+    <div class="container-fluid">
+         <ul class="navbar-nav">
+            <li class="nav-item">
+              <span class="text ms-5 text-dark"><a href="/events" class="text text-dark">All Events</a></span>
+              <span class="text active ms-5"> <a href="/calender" class="text active">My Calendar</a></span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- body -->
+<div class="contain d-flex flex-column vh-100">
+    <div class="row layer mt-5">
+      <!-- upcoming events block -->
+        <div class="col-12">
+          <% if (progress.length!=0 || upcoming.length!=0 ) { %>
+            <div class="row my-3">
+                    <div class="text fs-5">Upcoming Events</div>
+            </div>
+          <% } %>
+            <!-- present happening event -->
+            <% for(let event of progress) { %>
+              <div class="row mt-2">
+                  <div class="card mb-3 p-3" >
+                      <div class="row g-0">
+                        <div class="col-md-3">
+                          <img src="<%= event.url %> " class="img-fluid"  alt="...">
+                        </div>
+                        <div class="col-md-6">
+                          <div class="card-body">
+                            <h5 class="card-title text ms-1"><%= event.name  %> </h5>
+                            <p class="card-text ms-1"><small class="text-muted">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos vitae, sapiente quaerat beatae aperiam distinctio aliquid voluptatum praesentium aspernatur porro ipsam velit sunt eum iusto dolorem. Perferendis, nemo obcaecati! Soluta.</small></p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                          <% const date=event.date.getDate()+" "+month[event.date.getMonth()]+" "+event.date.getFullYear() %> 
+                          <p class="card-time fs-6 text-center me-4 mt-5"><%= date  %> </p>
+                          <p class="card-time fs-6 text-center me-4"><%= parseInt(event.start.split(":")[0])%12==0?'12':parseInt(event.start.split(":")[0])%12 %>:<%= event.start.split(":")[1] %><%= parseInt(event.start.split(":")[0])>=12?'PM':'AM' %>-<%= parseInt(event.end.split(":")[0])%12==0?'12':parseInt(event.end.split(":")[0])%12 %>:<%= event.end.split(":")[1] %><%= parseInt(event.end.split(":")[0])>=12?'PM':'AM' %> </p>
+                          <form action="/calender/delete/<%= event._id  %>?_method=DELETE" method="POST">
+                              <p class="button px-3">IN PROGRESS</p>
+                          </form>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <% } %> 
+              <!-- upcoming events -->
+            <% for(let event of upcoming) { %>
+              <div class="row mt-2">
+                  <div class="card mb-3 p-3" >
+                      <div class="row g-0">
+                        <div class="col-md-3">
+                          <img src="<%= event.url %> " class="img-fluid"  alt="...">
+                        </div>
+                        <div class="col-md-6">
+                          <div class="card-body">
+                            <h5 class="card-title text ms-1"><%= event.name  %> </h5>
+                            <p class="card-text ms-1"><small class="text-muted">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos vitae, sapiente quaerat beatae aperiam distinctio aliquid voluptatum praesentium aspernatur porro ipsam velit sunt eum iusto dolorem. Perferendis, nemo obcaecati! Soluta.</small></p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                          <% const date=event.date.getDate()+" "+month[event.date.getMonth()]+" "+event.date.getFullYear() %> 
+                          <p class="card-time fs-6 text-center me-4 mt-5"><%= date  %> </p>
+                          <p class="card-time fs-6 text-center me-4"> <%= parseInt(event.start.split(":")[0])%12==0?'12':parseInt(event.start.split(":")[0])%12 %>:<%= event.start.split(":")[1] %><%= parseInt(event.start.split(":")[0])>=12?'PM':'AM' %>-<%= parseInt(event.end.split(":")[0])%12==0?'12':parseInt(event.end.split(":")[0])%12 %>:<%= event.end.split(":")[1] %><%= parseInt(event.end.split(":")[0])>=12?'PM':'AM' %></p>
+                          <form action="/calender/delete/<%= event._id  %>?_method=DELETE" method="POST">
+                              <button class="button px-3">REMOVE FROM CALENDAR</button>
+                          </form>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <% } %> 
+              <!-- past events block -->
+              <% if (past.length!=0) { %>
+            <div class="row my-5">
+                    <div class="text fs-5">Past Events</div>
+            </div>
+            <% } %> 
+            <!-- past event -->
+            <% for(let event of past) { %>
+            <div class="card mb-3 p-3" >
+                <div class="row g-0">
+                  <div class="col-md-3">
+                    <img src="<%= event.url%>" class="img-fluid"  alt="...">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      <h5 class="card-title text ms-1"><%= event.name  %> </h5>
+                      <p class="card-text ms-1"><small class="text-muted"><%= event.desc  %> </small></p>
+                    </div>
+                  </div>
+                  <div class="col-md-3 text-center d-flex align-items-center justify-content-center">
+                    <div>
+                      <% const date=event.date.getDate()+" "+month[event.date.getMonth()]+" "+event.date.getFullYear() %> 
+                        <p class="card-time fs-6"><%= date  %> </p>
+                        <p class="card-time fs-6"><%= parseInt(event.start.split(":")[0])%12==0?'12':parseInt(event.start.split(":")[0])%12 %>:<%= event.start.split(":")[1] %><%= parseInt(event.start.split(":")[0])>=12?'PM':'AM' %>-<%= parseInt(event.end.split(":")[0])%12==0?'12':parseInt(event.end.split(":")[0])%12 %>:<%= event.end.split(":")[1] %><%= parseInt(event.end.split(":")[0])>=12?'PM':'AM' %></p>
+    
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% } %> 
+        </div>
+    </div>
+</div>

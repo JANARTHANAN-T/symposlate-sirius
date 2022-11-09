@@ -1,0 +1,32 @@
+<% layout('layout/boilerplate') %>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/css/form.css" />
+<link rel="stylesheet" href="/css/emptyEvent.css" />
+
+<!-- navbar -->
+<%- include('./partials/navbar')%>
+
+<!-- nav - event and calendar -->
+<div class="navbar fixed navbar-light">
+    <ul class="navbar-nav">
+        <li class="nav-item"><span class="text ms-5 text-dark"> <a href="/events" class="text text-dark">All Events</a></span>
+           <span class="text ms-5 active"> <a href="/calender" class="text active">My Calendar</a></span>
+        </li>
+    </ul>
+ </div>
+</div>
+
+<!-- body  -->
+<div class="contain d-flex flex-column vh-100">
+    <div class="row layer mt-5 d-flex flex-column vh-100">
+        <div class="col-12">
+            <div class="text fs-5">My Calendar</div>
+            <div class="text-center">
+                <img src="\Assets\BackgroundImages\nodata.png" style="min-width:200px;min-height: 200px;"  height="50%" width="50%" alt="no data">
+            </div>
+        </div>
+    </div>
+</div>
+
+

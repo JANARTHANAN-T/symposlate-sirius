@@ -1,0 +1,26 @@
+.contain{
+    padding: 30px;
+    background-color: #ECECEC;
+}
+
+.layer{
+    background-color: white;
+    padding: 60px;
+    margin: 10px;
+}
+
+.right{
+    background-color:#ECECEC;
+    padding: 10px 30px;
+}
+
+@media screen and (max-width:1000px) {
+    .image{
+        display: none;
+    }
+    .contain{
+        padding: 0px;
+        background-color: white;
+    }
+    
+}

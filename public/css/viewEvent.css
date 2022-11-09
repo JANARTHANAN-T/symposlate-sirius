@@ -1,0 +1,64 @@
+.text {
+  color: #461143;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.fixed {
+  position: fixed;
+  top: 60px;
+  background-color: #ececec;
+  width: 100%;
+  z-index: 15;
+}
+
+.active {
+  text-decoration: underline;
+  color: #461143;
+}
+
+.contain {
+  margin-top: 80px;
+  padding: 5px;
+  background-color: white;
+}
+
+.layer {
+  background-color: #ececec;
+  padding: 20px 30px 50px;
+  margin: 30px 70px;
+}
+
+.button:hover {
+  color: white;
+}
+
+.anchor{
+  text-decoration: none;
+  
+}
+
+.card-time {
+  font-size: 10px;
+}
+
+.button1 {
+  letter-spacing: 0.1mm;
+  border-radius: 0 13px;
+  background-color: #adadad;
+  color: black;
+  padding: 5px;
+  border: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .contain {
+    padding: 0px;
+    background-color:#ececec;
+  }
+  .layer {
+    background-color: #ececec;
+    padding: 20px 40px 50px;
+    margin: 30px 0px;
+  }
+}

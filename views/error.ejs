@@ -1,0 +1,27 @@
+<% layout('layout/boilerplate') %>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/css/emptyEvent.css" />
+<link rel="stylesheet" href="/css/form.css" />
+
+<!-- body -->
+<div class="containErr">
+    <div class="row layer d-flex flex-column vh-100">
+        <div class="col-12">
+            <div class="text-center text fw-bolder fs-1 mt-5">
+                <!-- status code -->
+                <div>
+                    <%= err.statusCode %> 
+                </div>
+                <!-- error message -->
+                <div>
+                    <%= err.message %> 
+                </div>
+                <!-- error image -->
+                <img src="\Assets\BackgroundImages\error.png" style="min-width:200px;min-height: 200px;"  height="50%" width="50%" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+

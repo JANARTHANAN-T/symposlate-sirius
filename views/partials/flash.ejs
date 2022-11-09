@@ -1,0 +1,24 @@
+<!-- stylesheets -->
+
+<link rel="stylesheet" href="/css/flash.css">
+
+<!-- Flash for business logic of adding calendar -->
+
+<%if(success && success.length){%>
+      <div id="toast"  class="toast"  strole="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="8000">
+            <div class="alert alert-dismissible fade show" role="alert" >
+                  <div class="toast-body ">
+                        <%=success%>
+                  </div>
+                  <button type="button" class="btn-close btn-close-white"  data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+      </div>
+<%}%>
+
+<!-- bootstrap toast script for auto vanish -->
+
+<script>
+      var toastElList =document.getElementById('toast')
+      let toasts =new bootstrap.Toast(toastElList)
+      toasts.show();
+</script>

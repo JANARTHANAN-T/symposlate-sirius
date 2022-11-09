@@ -1,0 +1,192 @@
+<% layout('layout/boilerplate') %>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/css/form.css" />
+<link rel="stylesheet" href="/css/viewEvent.css" />
+
+<!-- navbar -->
+<%- include('./partials/navbar')%>
+
+<!-- nav - events and calendar -->
+<div class="navbar fixed navbar-light">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <span class="text ms-5 active"> <a href="/events" class="text active">All Events</a></span>
+        <% if (ADMIN!=currentUser._id.toString()) { %>
+        <span class="text ms-5 text-dark"> <a href="/calender" class="text text-dark">My Calendar</a></span>
+        <% } %>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- body -->
+<div class="contain d-flex flex-column vh-100">
+    <div class="row layer my-5">
+        <div class="col-12">
+          <!-- upcoming events block -->
+          <% if (progress.length!=0 || upcoming.length!=0 ) { %>
+            <div class="row my-3">
+                <div class="col-6">
+                    <div class="text fs-5">Upcoming Events</div>
+                </div>
+                <!-- admin only showable add event button -->
+                <% if (ADMIN==currentUser._id.toString()) { %>
+                <div class="col-6 text-end">
+                    <a class="button btn px-3" href="/events/add">ADD EVENT</a>
+                </div>
+                <% } %> 
+            </div>
+          <% } %> 
+            <!-- admin showable card -->
+            <% if (ADMIN==currentUser._id.toString()) { %>
+            <div class="row mt-2">
+              <!-- currently happening event - admin -->
+              <% for(let event of progress) { %>
+                <div class="col-lg-3 col-md-4 col-sm-6 p-2 d-flex justify-content-center">
+                  <div class="card p-3" style="width: 15rem;">
+                   <a href="/events/edit/<%= event._id %>" class="anchor">
+                     <img src="<%= event.url %>" class="card-img-top" alt="...">
+                     <div class="card-body text-center">
+                       <h5 class="card-title text"><%= event.name  %> </h5>
+                       <% const date=event.date.getDate()+" "+month[event.date.getMonth()]+" "+event.date.getFullYear() %>  
+                       <p class="card-time text-muted"><b class="fw-bold">In progress</b> Ends at -<%= parseInt(event.end.split(":")[0])%12==0?'12':parseInt(event.end.split(":")[0])%12 %>:<%= event.end.split(":")[1] %><%= parseInt(event.end.split(":")[0])>=12?'PM':'AM' %></p>
+                     </div>
+                   </a>
+                   </div>
+                </div>
+                <% } %>
+                <!-- upcoming event - admin -->
+              <% for(let event of upcoming) { %>
+               <div class="col-lg-3 col-md-4 col-sm-6 p-2 d-flex justify-content-center">
+                 <div class="card p-3" style="width: 15rem;">
+                  <a href="/events/edit/<%= event._id %>" class="anchor">
+                    <img src="<%= event.url %>" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                      <h5 class="card-title text"><%= event.name  %> </h5>
+                      <% const date=event.date.getDate()+" "+month[event.date.getMonth()]+" "+event.date.getFullYear() %>  
+                      <p class="card-time text-muted"><%= date %>, <%= parseInt(event.start.split(":")[0])%12==0?'12':parseInt(event.start.split(":")[0])%12 %>:<%= event.start.split(":")[1] %><%= parseInt(event.start.split(":")[0])>=12?'PM':'AM' %>-<%= parseInt(event.end.split(":")[0])%12==0?'12':parseInt(event.end.split(":")[0])%12 %>:<%= event.end.split(":")[1] %><%= parseInt(event.end.split(":")[0])>=12?'PM':'AM' %></p>
+                    </div>
+                  </a>
+                  </div>
+               </div>
+               <% } %> 
+            <% } else { %>
+
+            <!-- user showable card -->
+            <!-- currently happening event - user -->
+            <% for(let event of progress) { %>
+              <div class="row mt-2">
+                  <div class="card mb-3 p-3" >
+                      <div class="row g-0">
+                        <div class="col-md-3">
+                          <img src="<%= event.url %> " class="img-fluid"  alt="...">
+                        </div>
+                        <div class="col-md-6">
+                          <div class="card-body">
+                            <h5 class="card-title text ms-1"><%= event.name  %> </h5>
+                            <p class="card-text ms-1"><small class="text-muted">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos vitae, sapiente quaerat beatae aperiam distinctio aliquid voluptatum praesentium aspernatur porro ipsam velit sunt eum iusto dolorem. Perferendis, nemo obcaecati! Soluta.</small></p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                          <% const date=event.date.getDate()+" "+month[event.date.getMonth()]+" "+event.date.getFullYear() %> 
+                          <p class="card-time fs-6 text-center me-4 mt-5"><%= date  %> </p>
+                          <p class="card-time fs-6 text-center me-4"> <b>In progress</b> Ends at -<%= parseInt(event.end.split(":")[0])%12==0?'12':parseInt(event.end.split(":")[0])%12 %>:<%= event.end.split(":")[1] %><%= parseInt(event.end.split(":")[0])>=12?'PM':'AM' %> </p>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+              <% } %> 
+              <!-- upcoming events - user -->
+             <% for(let event of upcoming) { %>
+            <div class="row mt-2">
+                <div class="card mb-3 p-3" >
+                    <div class="row g-0">
+                      <div class="col-md-3">
+                        <img src="<%= event.url %> " class="img-fluid"  alt="...">
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title text ms-1"><%= event.name  %> </h5>
+                          <p class="card-text ms-1"><small class="text-muted">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos vitae, sapiente quaerat beatae aperiam distinctio aliquid voluptatum praesentium aspernatur porro ipsam velit sunt eum iusto dolorem. Perferendis, nemo obcaecati! Soluta.</small></p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 text-center">
+                        <% const date=event.date.getDate()+" "+month[event.date.getMonth()]+" "+event.date.getFullYear() %> 
+                        <p class="card-time fs-6 text-center me-4 mt-5"><%= date  %> </p>
+                        <p class="card-time fs-6 text-center me-4"><%= parseInt(event.start.split(":")[0])%12==0?'12':parseInt(event.start.split(":")[0])%12 %>:<%= event.start.split(":")[1] %><%= parseInt(event.start.split(":")[0])>=12?'PM':'AM' %>-<%= parseInt(event.end.split(":")[0])%12==0?'12':parseInt(event.end.split(":")[0])%12 %>:<%= event.end.split(":")[1] %><%= parseInt(event.end.split(":")[0])>=12?'PM':'AM' %></p>
+                        <form action="calender/add/<%= event._id  %>" method="get">
+                          <div class="d-grid gap-3">
+                        <% if (register.some((id) => event._id.equals(id)) ) { %>
+                          <p class="button1">SCHEDULED</p>
+                        <% }else{ %>
+                          <button class="button px-3">ADD TO CALENDAR</button>
+                          <% } %> 
+                        </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <% } %> 
+            <% } %> 
+
+
+            <!-- past event blocks -->
+            <% if (past.length!=0) { %>
+            <div class="row my-5">
+                    <div class="text fs-5">Past Events</div>
+            </div>
+            <% } %> 
+            <!-- admin showable card -->
+            <% if (ADMIN==currentUser._id.toString()) { %>
+            <div class="row mt-2">
+              <% for(let event of past) { %>
+                <div class="col-lg-3 col-md-4 col-sm-6 p-2 d-flex justify-content-center">
+                  <div class="card p-3" style="width: 15rem;">
+                   <a href="/events/edit/<%= event._id %>" class="anchor">
+                     <img src="<%= event.url %>" class="card-img-top" alt="...">
+                     <div class="card-body text-center">
+                       <h5 class="card-title text"><%= event.name  %> </h5>
+                       <% const date=event.date.getDate()+" "+month[event.date.getMonth()]+" "+event.date.getFullYear() %> 
+                       <p class="card-time text-muted"><%= date  %>, <%= parseInt(event.start.split(":")[0])%12==0?'12':parseInt(event.start.split(":")[0])%12 %>:<%= event.start.split(":")[1] %><%= parseInt(event.start.split(":")[0])>=12?'PM':'AM' %>-<%= parseInt(event.end.split(":")[0])%12==0?'12':parseInt(event.end.split(":")[0])%12 %>:<%= event.end.split(":")[1] %><%= parseInt(event.end.split(":")[0])>=12?'PM':'AM' %></p>
+                     </div>
+                   </a>
+                   </div>
+                </div>
+              <% } %> 
+            </div>
+            <% } else { %>
+            <!-- user showable card -->
+            <% for(let event of past) { %>
+            <div class="card mb-3 p-3" >
+                <div class="row g-0">
+                  <div class="col-md-3">
+                    <img src="<%= event.url%>" class="img-fluid"  alt="...">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      <h5 class="card-title text ms-1"><%= event.name  %> </h5>
+                      <p class="card-text ms-1"><small class="text-muted"><%= event.desc  %> </small></p>
+                    </div>
+                  </div>
+                  <div class="col-md-3 text-center d-flex align-items-center justify-content-center">
+                    <div>
+                      <% const date=event.date.getDate()+" "+month[event.date.getMonth()]+" "+event.date.getFullYear() %> 
+                        <p class="card-time fs-6"><%= date  %> </p>
+                        <p class="card-time fs-6"> <%= parseInt(event.start.split(":")[0])%12==0?'12':parseInt(event.start.split(":")[0])%12 %>:<%= event.start.split(":")[1] %><%= parseInt(event.start.split(":")[0])>=12?'PM':'AM' %>-<%= parseInt(event.end.split(":")[0])%12==0?'12':parseInt(event.end.split(":")[0])%12 %>:<%= event.end.split(":")[1] %><%= parseInt(event.end.split(":")[0])>=12?'PM':'AM' %> </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% } %> 
+          <% } %> 
+          </div>
+        </div>
+        </div>
+    </div>
+</div>
+

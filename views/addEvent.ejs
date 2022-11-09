@@ -1,0 +1,64 @@
+<% layout('layout/boilerplate') %>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/css/form.css" />
+<link rel="stylesheet" href="/css/addEvent.css" />
+
+<!-- navbar  -->
+<%- include('./partials/navbar')%>
+
+<!-- form body -->
+
+<div>
+  <div class="contain mt-5">
+    <!-- card layout -->
+    <div class="row layer ">
+      <!-- left image -->
+      <div class="col-lg-6 left">
+        <div class="d-flex align-items-center mb-4">
+           <a href="/events">
+            <img src="\Assets\Icons\arrow.png"  alt="" height="20px" />
+          </a>
+          <span class="header fw-bold fs-4 px-2"> Add Event</span><br />
+        </div>
+        <img src="\Assets\BackgroundImages\bg2.png" class="img-fluid image" />
+      </div>
+      <!-- right add event form -->
+      <div class="col-lg-6 right">
+        <h4 class="my-4 text-center fw-bold">Event Information</h4>
+        <form name="addevent" action="/events/add" method="post" class="d-grid needs-validation px-4" >
+          <label for="eventName" class="form-label mt-2 fw-bold" >Event name</label>
+          <input type="text" class="form-control input" id="eventName" name="name" required/>
+          <label for="eventDesc" class="form-label mt-2 fw-bold">Event Description</label>
+          <textarea class="form-control input" id="eventDesc" name="desc" required></textarea>
+          <label for="eventUrl" class="form-label mt-2 fw-bold">Event Url</label>
+          <input type="url" class="form-control input" id="eventUrl" name="url" required/>
+          <label for="eventName" class="form-label mt-2 fw-bold">Event Date</label>
+          <input type="date" placeholder="username" class="form-control input"id="eventName" name="date" required/>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="start" class="form-label mt-2 fw-bold">Start Time</label>
+              <input type="time" class="form-control input" name="start" id="start" required/>
+            </div>
+            <div class="col-md-6">
+              <label for="end" class="form-label mt-2 fw-bold">End Time</label>
+              <input type="time" class="form-control input" name="end" id="end" required/>
+            </div>
+          </div>
+          <div class="invalid-feedback">Please provide a valid zip.</div>
+          <div class="text-danger fs-6"><%= errMsg  %> </div>
+          <div class="row align-items-center">
+            <!-- back to event page -->
+            <div class="col-sm-6 text-end">
+              <a class="btn fs-5" href="/events">Cancel</a>
+            </div>
+            <!-- add event button -->
+            <div class="col-sm-6 text-center">
+              <button class="button my-3 px-3">ADD EVENT</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

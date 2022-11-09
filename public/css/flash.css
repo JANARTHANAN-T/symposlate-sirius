@@ -1,0 +1,12 @@
+.alert{
+    position: absolute;
+    background-color:#461143 ;
+    color:#FFF;
+    display: flex;
+    height: 80px;
+    width:400px;
+    border-radius: 0 15px;
+    align-items: flex-end;
+    top:18vh;
+    right:20px;
+}
